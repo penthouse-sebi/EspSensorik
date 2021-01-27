@@ -59,3 +59,6 @@ if not reset_btn.value():
 #   print("Local time after synchronization：%s" %str(time.localtime()))
 # except:
 #   print("Error syncing time")
+
+
+#bjhsdbjhdb
