@@ -3,6 +3,7 @@ from wifimgr import send_header,handle_not_found
 import BME280
 import CCS811
 from mqtt import MQTT
+from upgrade import upgrade
 from CONF import (
     NETWORK_PROFILES, DEFAULT_HOST_IP, CONF_FILE, 
     DEFAULT_MQTT_SUB_TOPIC, DEFAULT_MQTT_PUB_TOPIC,
@@ -19,8 +20,7 @@ except:
 
 
 ##################################################################################
-##################################################################################
-##################################################################################
+
 ##################################################################################
 import _thread
 import time
@@ -199,6 +199,14 @@ def page_configures(web_client, config):
                     Be careful about security!
                 </span>
             </h5>
+
+            <form action="upgrade" method="post">                
+                <p style="text-align: center;"> <input type="submit" value="upgrade" /></p>
+            </form>
+
+
+
+
         </html>
     """ % dict(filename=NETWORK_PROFILES))
 
@@ -353,6 +361,11 @@ while True:
                 c[key] = value
             write_conf(c)
             page_configures(web_client, config)
+
+        if response.get('href') == '/upgrade':
+            print('Upgrade....')
+            upgrade()
+
 
     elif response.get('method') == 'GET':
 

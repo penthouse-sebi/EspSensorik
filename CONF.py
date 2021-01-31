@@ -17,3 +17,9 @@ PIN_SCL = 22
 PIN_SDA = 21
 
 SENSORS_SLEEP = 10
+
+
+MAIN_URL = "https://raw.githubusercontent.com/penthouse-sebi/EspSensorik/master/"
+# UPGRADE_FILES = ["BME280.py", "boot.py", "CCS811.py", "CONF.py", "main.py", "mqtt.py", "umqttsimple.py", "wifimgr.py"]
+
+UPGRADE_FILES = ["main.py"]
