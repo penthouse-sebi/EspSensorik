@@ -1,18 +1,12 @@
-
-
-
-
-
 import time
 from machine import Pin
 import machine
 import os
+from CONF import RESET_DEL_FILES, RESET_DELAY, RESET_BTN, RESET_LED
 
 
-RESET_DEL_FILES = ['wifi.dat']
-timeout = 0.5
-reset_led = Pin(16,Pin.OUT)
-reset_btn = Pin(14, Pin.IN, Pin.PULL_UP)
+reset_led = Pin(RESET_LED,Pin.OUT)
+reset_btn = Pin(RESET_BTN, Pin.IN, Pin.PULL_UP)
 
 
 if not reset_btn.value():
@@ -20,18 +14,18 @@ if not reset_btn.value():
 
     for i in range(0,10):
         reset_led.value(1)
-        time.sleep(timeout)
+        time.sleep(RESET_DELAY)
         reset_led.value(0)
-        time.sleep(timeout)
+        time.sleep(RESET_DELAY)
         print('.', end='')
         if reset_btn.value():
             break
 
     for i in range(0,30):
         reset_led.value(1)
-        time.sleep(timeout/3)
+        time.sleep(RESET_DELAY/3)
         reset_led.value(0)
-        time.sleep(timeout/3)
+        time.sleep(RESET_DELAY/3)
         print('.', end='')
         if reset_btn.value():
             print('\n\nreset canceled\n\n')
@@ -43,22 +37,3 @@ if not reset_btn.value():
             os.remove(f)
         machine.reset()
 
-
-
-
-# import ntptime
-# import time
-
-# #if needed, overwrite default time server
-# ntptime.host = "1.europe.pool.ntp.org"
-
-# try:
-#   print("Local time before synchronization：%s" %str(time.localtime()))
-#   #make sure to have internet connection
-#   ntptime.settime()
-#   print("Local time after synchronization：%s" %str(time.localtime()))
-# except:
-#   print("Error syncing time")
-
-
-#bjhsdbjhdb
